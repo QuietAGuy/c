@@ -10,26 +10,26 @@
 # include <stdbool.h>
 
 /* Externs needed by argp */
-const char     *argp_program_version      = "argp example version 1.0" ;     // Program version
-const char     *argp_program_bug_address  = "email@domain.com" ;             // Developer email
+const char *argp_program_version      = "argp example version 1.0" ; // Program version
+const char *argp_program_bug_address  = "email@domain.com" ; // Developer email
 
 /* File local properties */
-static char     doc[]                     = "Program to hold commands" ;     // Program description
-static char     args_doc[]                = "<name>" ;                       // Non-Option arguments syntax, appended to "Usage: [OPTION...]" help message
+static char doc[]                     = "Program to hold commands" ; // Program description
+static char args_doc[]                = "<name>" ; // Non-Option arguments syntax, appended to "Usage: [OPTION...]" help message
 
-static struct   argp_option options[] = {                                    // Options expected in the command line
-	{ "gender",  'g',  "<m/f>",     0,   "gender of the person"},            // Long Option, Key/Short Option, Argument Name, Flags, Document]  
+static struct   argp_option options[] = { // Options expected in the command line
+	{ "gender",  'g',  "<m/f>",     0,   "gender of the person"}, // Long Option, Key/Short Option, Argument Name, Flags, Document]  
 	{ "age",     'a',  "<age>",     0,   "age of the person"},
 	{ 0 } 
 } ;
 
 /* Custom struct to keep track of arguments, an instance of this is passed to argp_parse(), which sends it as a parameter state->input to parser function */
 struct arguments {
-	char        name[101] ;          // Name value from command line
-	char        gender ;             // Gender value from command line
-	unsigned    age ;                // Age value from command line
-	bool        gender_present ;     // Whether gender option present 
-	bool        age_present ;        // Whether age option present
+	char        name[101] ; // Name value from command line
+	char        gender ; // Gender value from command line
+	unsigned    age ; // Age value from command line
+	bool        gender_present ; // Whether gender option present 
+	bool        age_present ; // Whether age option present
 } ;
 
 /* Check if input string is number */
@@ -72,7 +72,7 @@ static error_t parser(int key, char *argument, struct argp_state *state) { // Ke
 	struct arguments *arguments = state->input ;
 
 	switch(key) {
-		case 'g':                                                   // Option argument - gender
+		case 'g': // Option argument - gender
 			if (strnlen(argument, 2) != 1) {
 				argp_usage(state) ;
 			}
@@ -88,7 +88,7 @@ static error_t parser(int key, char *argument, struct argp_state *state) { // Ke
 
 			break ;
 
-		case 'a':                                                   // Option argument - age
+		case 'a': // Option argument - age
 			if (!is_number(argument)) {
 				argp_usage(state) ;
 			}
@@ -104,7 +104,7 @@ static error_t parser(int key, char *argument, struct argp_state *state) { // Ke
 
 			break ;
 
-		case ARGP_KEY_ARG:                                          // Non-Option argument - name
+		case ARGP_KEY_ARG: // Non-Option argument - name
 			if (state->arg_num > 0 || !check_space_alpha_trim_copy(arguments->name, argument, 100)) {
 				argp_usage(state) ;
 			}
