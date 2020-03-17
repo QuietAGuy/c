@@ -16,9 +16,9 @@ static char     doc[]                     = "Program to hold commands" ;     // 
 static char     args_doc[]                = "<name>" ;                       // Non-Option arguments syntax, appended to "Usage: [OPTION...]" help message
 
 static struct   argp_option options[] = {                                    // Options expected in the command line
-    { "gender",  'g',  "<m/f>",     0,   "gender of the person"},            // Long Option, Key/Short Option, Argument Name, Flags, Document]  
-    { "age",     'a',  "<age>",     0,   "age of the person"},
-    { 0 } 
+	{ "gender",  'g',  "<m/f>",     0,   "gender of the person"},            // Long Option, Key/Short Option, Argument Name, Flags, Document]  
+	{ "age",     'a',  "<age>",     0,   "age of the person"},
+	{ 0 } 
 } ;
 
 /* Custom struct to keep track of arguments, an instance of this is passed to argp_parse(), which sends it as a parameter state->input to parser function */
