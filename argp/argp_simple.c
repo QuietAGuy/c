@@ -23,11 +23,11 @@ static struct   argp_option options[] = {                                    // 
 
 /* Custom struct to keep track of arguments, an instance of this is passed to argp_parse(), which sends it as a parameter state->input to parser function */
 struct arguments {
-	char        name[101] ;                                                  // Name value from command line
-	char        gender ;                                                     // Gender value from command line
-	unsigned    age ;                                                        // Age value from command line
-	bool        gender_present ;                                             // Whether gender option present 
-	bool        age_present ;                                                // Whether age option present
+	char        name[101] ;          // Name value from command line
+	char        gender ;             // Gender value from command line
+	unsigned    age ;                // Age value from command line
+	bool        gender_present ;     // Whether gender option present 
+	bool        age_present ;        // Whether age option present
 } ;
 
 /* Parser function, called by argp_parse for each argument */
@@ -41,7 +41,7 @@ bool is_number(char *argument) {
 	return true ;
 }
 
-bool check_space_alpha_trim_copy(char *dest, char *src, int limit) {         // Checks only the first 'limit' number of characters that are copied
+bool check_space_alpha_trim_copy(char *dest, char *src, int limit) { // Checks only the first 'limit' number of characters that are copied
 	unsigned char_count = 0 ;
 
 	for (char *from = src; *from && char_count != limit; ++from) {
@@ -64,13 +64,13 @@ bool check_space_alpha_trim_copy(char *dest, char *src, int limit) {         // 
 	return char_count > 0 ? true : false ;
 }
 
-static error_t parser(int key, char *argument, struct argp_state *state) {   // Key/Short Option, Argument value, State containing arguments instance
+static error_t parser(int key, char *argument, struct argp_state *state) { // Key/Short Option, Argument value, State containing arguments instance
 	struct arguments *arguments = state->input ;
 
 	switch(key) {
-		case 'g':                                                            // Option argument - gender
+		case 'g':                                                   // Option argument - gender
 			if (strnlen(argument, 2) != 1) {
-				argp_usage(state) ;                                          // Prints usage and exits the program
+				argp_usage(state) ;
 			}
 
 			char gender = tolower(*argument) ;
@@ -84,7 +84,7 @@ static error_t parser(int key, char *argument, struct argp_state *state) {   // 
 
 			break ;
 
-		case 'a':                                                            // Option argument - age
+		case 'a':                                                   // Option argument - age
 			if (!is_number(argument)) {
 				argp_usage(state) ;
 			}
@@ -100,7 +100,7 @@ static error_t parser(int key, char *argument, struct argp_state *state) {   // 
 
 			break ;
 
-		case ARGP_KEY_ARG:                                                   // Non-Option argument - name
+		case ARGP_KEY_ARG:                                          // Non-Option argument - name
 			if (state->arg_num > 0 || !check_space_alpha_trim_copy(arguments->name, argument, 100)) {
 				argp_usage(state) ;
 			}
@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
 	static struct argp argp = {options, parser, args_doc, doc} ;
 	static struct arguments arguments ; 
 
-	if (argp_parse(&argp, argc, argv, 0, NULL, &arguments) == 0) {        // argp *argp, int argc, char **argv, int flags, int *arg_index, void *input
+	if (argp_parse(&argp, argc, argv, 0, NULL, &arguments) == 0) { // argp *argp, int argc, char **argv, int flags, int *arg_index, void *input
 		printf("Name = (%s) Gender = (%s) Age = (%u)\n", arguments.name, arguments.gender == 'm' ? "male" : "female", arguments.age) ;
 	}
 
