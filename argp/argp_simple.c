@@ -30,7 +30,7 @@ struct arguments {
 	bool        age_present ;        // Whether age option present
 } ;
 
-/* Parser function, called by argp_parse for each argument */
+/* Check if input string is number */
 bool is_number(char *argument) {
 	for(char *chptr = argument; *chptr; ++chptr) {
 		if (*chptr < '0' || *chptr > '9') {
@@ -41,6 +41,7 @@ bool is_number(char *argument) {
 	return true ;
 }
 
+/* Check if input string is alphabet/space, trim extra space, copy to destination */
 bool check_space_alpha_trim_copy(char *dest, char *src, int limit) { // Checks only the first 'limit' number of characters that are copied
 	unsigned char_count = 0 ;
 
@@ -64,6 +65,7 @@ bool check_space_alpha_trim_copy(char *dest, char *src, int limit) { // Checks o
 	return char_count > 0 ? true : false ;
 }
 
+/* Parser function, called by argp_parse for each argument */
 static error_t parser(int key, char *argument, struct argp_state *state) { // Key/Short Option, Argument value, State containing arguments instance
 	struct arguments *arguments = state->input ;
 
