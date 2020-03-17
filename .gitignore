@@ -1,5 +1,6 @@
 # My settings
 *.swp
+argp/argp_simple
 
 # Prerequisites
 *.d
