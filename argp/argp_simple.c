@@ -5,7 +5,7 @@
 # include <stdbool.h>
 
 /* Command syntax */
-// ./argp_example -g m -a 26 Tom
+// ./argp_example -g m/f -a 26 Tom
 
 /* Externs needed by argp */
 const char     *argp_program_version      = "argp example version 1.0" ;     // Program version
