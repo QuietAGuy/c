@@ -1,2 +1,2 @@
-# c_notelets
+# c
 C lessons and examples 
